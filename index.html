@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビーバーちゃん</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 基本スタイル */
+        body {
+            font-family: 'Yomogi', cursive;
+            background-color: #FDF6E8; /* 古紙のような背景色 */
+            background-image: url('data:image/svg+xml,%3Csvg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23D3C4A8" fill-opacity="0.15"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM50 50h-4v-2h4v-4h2v4h4v2h-4v4h-2v-4zM20 20h-4v-2h4v-4h2v4h4v2h-4v4h-2v-4z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            background-attachment: fixed; /* 背景を固定 */
+            background-size: 80px 80px;
+        }
+
+        .storybook-page {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: transparent; 
+        }
+        
+        .text-box {
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 2px solid #D3C4A8;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .text-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ビーバーちゃんを気だるげに揺らすアニメーション */
+        @keyframes lazy-sway {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        .lazy-animation {
+            animation: lazy-sway 6s ease-in-out infinite;
+        }
+
+        /* CTAボタンのスタイル */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .cta-button {
+            background-color: #FBBF24; /* amber-400 */
+            border: 2px solid #D97706; /* amber-600 */
+            box-shadow: 0 5px 0 #92400E; /* amber-800 */
+            transition: all 0.2s ease;
+            animation: pulse 3s infinite;
+        }
+        .cta-button:hover {
+            animation-play-state: paused;
+            transform: translateY(2px) scale(1.02);
+            box-shadow: 0 3px 0 #92400E;
+        }
+        .cta-button:active {
+            transform: translateY(5px);
+            box-shadow: 0 0px 0 #92400E;
+        }
+
+        /* スクロールアニメーション */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* --- ハート演出のためのCSS --- */
+        .beaver-container {
+            position: relative; /* ハートの位置の基準点 */
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px; /* ハートの基本サイズ */
+            pointer-events: none; /* ハートがクリックの邪魔をしないように */
+            animation: float-up 2s ease-out forwards;
+            color: red; /* デフォルトの色 */
+        }
+
+        @keyframes float-up {
+            from {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-200px) scale(0); /* もっと高く飛ぶように */
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <section class="storybook-page">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-6xl text-gray-800 mb-8 animate-on-scroll">ビーバーちゃんは<br>あまり動きたくないのですわ</h1>
+            <img 
+                src="beaver_chan.png" 
+                alt="主役のビーバーちゃん" 
+                class="w-64 md:w-80 mx-auto lazy-animation animate-on-scroll"
+                style="transition-delay: 200ms;"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/FDF6E8/333?text=Beaver-chan'"
+            >
+            <p class="mt-8 text-lg animate-on-scroll" style="transition-delay: 400ms;">（はぁ…またお仕事の時間かしら…）</p>
+        </div>
+    </section>
+
+    <section class="storybook-page">
+        <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
+            <div class="text-box text-lg leading-relaxed order-2 md:order-1 animate-on-scroll" style="transition-delay: 400ms;">
+                <p>そもそも、かわいくしているのだって<br>なかなかの重労働ですのよ。<br>お分かりになって？</p>
+                <br>
+                <p class="font-bold">「ニンゲンは勝手に癒やされていれば<br>よろしいんじゃなくて？」</p>
+            </div>
+            <div class="order-1 md:order-2 animate-on-scroll">
+                <img 
+                    src="beaver_chan.png" 
+                    alt="気だるげなビーバーちゃん" 
+                    class="w-64 mx-auto transform -rotate-6"
+                    onerror="this.onerror=null;this.src='https://placehold.co/400x400/FDF6E8/333?text=Beaver-chan'"
+                >
+            </div>
+        </div>
+    </section>
+
+    <section class="storybook-page" style="background-color: rgba(186, 230, 253, 0.2);">
+        <div class="text-center max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl text-gray-800 mb-8 animate-on-scroll">ビーバーちゃんの生態ですわ</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="text-box animate-on-scroll" style="transition-delay: 200ms;">
+                    <h3 class="text-xl font-bold mb-2 text-yellow-500">① 勝手に癒やされるがよい</h3>
+                    <p>「別にわたしは何もしていませんわ。人間が勝手にこのわがままボディに抱きついて、癒やされているだけですのよ。」</p>
+                </div>
+                <div class="text-box animate-on-scroll" style="transition-delay: 400ms;">
+                    <h3 class="text-xl font-bold mb-2 text-blue-500">② 聞いているフリは得意</h3>
+                    <p>「お悩み相談？…はぁ。聞いているフリは得意ですわよ。だいたい右から左に流れていきますけれど、何か問題でも？」</p>
+                </div>
+                <div class="text-box animate-on-scroll" style="transition-delay: 600ms;">
+                    <h3 class="text-xl font-bold mb-2 text-red-500">③ おでかけは…別ですの</h3>
+                    <p>「おでかけですって！？…べ、別にテンションが上がっているわけではございませんわ。でも、外の景色は…その…悪くないですわね！」</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="storybook-page" style="background-color: rgba(254, 243, 199, 0.2);">
+        <div class="text-center max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-4xl text-gray-800 mb-6 animate-on-scroll">あら、あなた。<br>わたしと、おともだちになってくださる？</h2>
+            <p class="text-lg mb-8 animate-on-scroll" style="transition-delay: 200ms;">…まぁ、なってあげてもよろしくてよ。退屈しのぎくらいにはなるのかしら。</p>
+            
+            <div class="beaver-container animate-on-scroll" style="transition-delay: 400ms;">
+                <img 
+                    src="beaver_chan.png" 
+                    alt="おともだちを待つビーバーちゃん" 
+                    class="w-64 mx-auto mb-8 lazy-animation"
+                    onerror="this.onerror=null;this.src='https://placehold.co/400x400/FDF6E8/333?text=Beaver-chan'"
+                >
+            </div>
+
+            <a href="#" id="friend-button" class="cta-button inline-block text-white text-2xl font-bold py-4 px-12 rounded-full shadow-lg animate-on-scroll" style="transition-delay: 600ms;">
+                おともだちになる！
+            </a>
+            <p class="mt-8 text-sm text-gray-500 animate-on-scroll" style="transition-delay: 800ms;">…よろしくてよ。</p>
+        </div>
+    </section>
+
+    <script>
+        // --- スクロールアニメーションのためのJavaScript ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // --- ここからハート演出のためのJavaScript ---
+            const friendButton = document.getElementById('friend-button');
+            const beaverContainer = document.querySelector('.beaver-container');
+
+            friendButton.addEventListener('click', (event) => {
+                event.preventDefault(); // リンクでページ上部に飛ぶのを防ぐ
+
+                // ハートをたくさん生成する
+                for (let i = 0; i < 30; i++) {
+                    // 少し時間差をつけてハートを生成
+                    setTimeout(() => {
+                        createHeart(beaverContainer);
+                    }, i * 50);
+                }
+            });
+
+            function createHeart(container) {
+                const heart = document.createElement('span');
+                heart.className = 'heart';
+                
+                // いろいろなハートや色を用意
+                const heartIcons = ['❤️', '💖', '💗', '💕', '💓'];
+                const heartColors = ['#ff69b4', '#ff1493', '#ffc0cb', '#db7093', '#f08080'];
+
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+
+                // ハートの出現位置を画像周辺にランダムに設定
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+
+                // ハートの大きさとアニメーション時間をランダムに
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                const animationDuration = Math.random() * 1.5 + 1; // 1秒から2.5秒
+                heart.style.animationDuration = animationDuration + 's';
+
+                container.appendChild(heart);
+
+                // アニメーションが終わったらハートを消す
+                setTimeout(() => {
+                    heart.remove();
+                }, animationDuration * 1000);
+            }
+        });
+    </script>
+</body>
+</html>
