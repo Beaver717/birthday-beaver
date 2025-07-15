@@ -743,7 +743,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Beaver-chan's Sweet Wishes.</p>
+        <p>&copy; おうちにかえりましょ</p>
     </footer>
 
     <!-- ここからJavaScriptのお部屋ですわ -->
@@ -967,7 +967,42 @@
             };
 
             setupPresentOpening();
+// beaver-2.html に追加するコード
 
+// --- ここからが追加した魔法ですわ ---
+const setupReturnMagic = () => {
+    const footerElement = document.querySelector('footer');
+    if (!footerElement) return;
+
+    // フッターにカーソルを合わせると、ヒントが出るようにしますの
+    footerElement.style.cursor = 'pointer';
+    footerElement.title = 'いつものわたくしに戻りますわ…';
+
+    footerElement.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log("あら、もうお帰りの時間かしら？");
+
+        // ページが静かにおやすみする準備をしますの
+        document.body.style.transition = 'background-color 2s ease, opacity 2s ease';
+        document.body.style.backgroundColor = '#FDF6E8'; // 元のページの色に戻っていきますわ
+        document.body.style.opacity = 0;
+
+        // キラキラもだんだんとおとなしくなりますの
+        const sparkles = document.querySelector('.sparkle-container');
+        if (sparkles) {
+            sparkles.style.transition = 'opacity 2s ease';
+            sparkles.style.opacity = 0;
+        }
+
+        // 完全に元のページに戻る前に、少しだけ時間をくださいまし
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 2000); // 2秒かけて、元の世界へ…
+    });
+};
+
+setupReturnMagic();
+// --- 追加した魔法はここまでですわ ---
         });
     </script>
     <!-- ここまでJavaScriptのお部屋でしたわ -->
