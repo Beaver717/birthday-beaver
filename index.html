@@ -3,257 +3,1009 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ビーバーちゃん</title>
+    <title>【とびっきり可愛い】ビーバーちゃんからのお誕生日プレゼント</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <!-- Google Fontsの読み込みですわ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- ここからCSSのお部屋ですわ -->
     <style>
-        /* 基本スタイル */
-        body {
-            font-family: 'Yomogi', cursive;
-            background-color: #FDF6E8; /* 古紙のような背景色 */
-            background-image: url('data:image/svg+xml,%3Csvg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23D3C4A8" fill-opacity="0.15"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM50 50h-4v-2h4v-4h2v4h4v2h-4v4h-2v-4zM20 20h-4v-2h4v-4h2v4h4v2h-4v4h-2v-4z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-            background-attachment: fixed; /* 背景を固定 */
-            background-size: 80px 80px;
+        /*
+         * あらあら、CSSですわね。
+         * 「とびっきり可愛く」というご注文、わたくしの腕の見せ所ですわ！
+         * もっとふわふわ、もっとキラキラに、心を込めて飾りますの。
+        */
+
+        /* ===== 基本設定 ===== */
+        :root {
+            --font-title: 'Yusei Magic', sans-serif;
+            --font-body: 'M PLUS Rounded 1c', sans-serif;
+            --text-color: #6d4c41; /* 優しいブラウン */
+            --white-color: #fffafc; /* ほんのりピンクがかった白 */
+            --accent-color: #ff7e9f; /* 少し鮮やかなピンク */
+            --accent-light: #ffc0cb; /* ベビーピンク */
+            --accent-dark: #e65a7f;
+
+            /* 背景グラデーションの定義ですわ。もっと可愛くしましたの！ */
+            --bg-1: linear-gradient(145deg, #fff0f3 0%, #ffe4e9 100%);
+            --bg-2: linear-gradient(145deg, #ffe4e9 0%, #ffd9e2 100%);
+            --bg-3: linear-gradient(145deg, #ffd9e2 0%, #ffcce0 100%);
+            --bg-4: linear-gradient(145deg, #ffcce0 0%, #ffc0d8 100%);
+            --bg-5: linear-gradient(145deg, #ffc0d8 0%, #ffb3cf 100%);
         }
 
-        .storybook-page {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            cursor: none; /* デフォルトカーソルは隠しますわ */
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background: var(--bg-1);
+            transition: background 2s ease-in-out;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        body[data-bg-state="1"] { background: var(--bg-1); }
+        body[data-bg-state="2"] { background: var(--bg-2); }
+        body[data-bg-state="3"] { background: var(--bg-3); }
+        body[data-bg-state="4"] { background: var(--bg-4); }
+        body[data-bg-state="5"] { background: var(--bg-5); }
+
+        /* ===== カスタムカーソルですわ ===== */
+        #custom-cursor {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: transform 0.1s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
+            z-index: 10000;
+        }
+
+        body:hover #custom-cursor {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #custom-cursor::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-light);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease;
+        }
+
+        /* リンクやボタンにホバーした時のカーソルですわ */
+        a:hover ~ #custom-cursor,
+        button:hover ~ #custom-cursor,
+        .present-card:hover ~ #custom-cursor {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 126, 159, 0.2);
+        }
+        .present-card:hover ~ #custom-cursor::after {
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+
+        /* ===== キラキラの演出ですわ ===== */
+        .sparkle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .sparkle {
+            position: absolute;
+            background-color: var(--white-color);
+            border-radius: 50%;
+            animation: fall 5s linear infinite;
+            opacity: 0;
+            box-shadow: 0 0 10px #fff, 0 0 20px var(--accent-light);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) scale(0.8) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+
+        /* ===== セクション共通のスタイル ===== */
+        .content-section {
             min-height: 100vh;
-            padding: 4rem 2rem;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 120px 40px;
             position: relative;
-            background-color: transparent; 
+            z-index: 1;
         }
-        
-        .text-box {
-            background-color: rgba(255, 255, 255, 0.85);
-            border: 2px solid #D3C4A8;
-            border-radius: 1rem;
-            padding: 2rem;
+
+        .section-container {
+            max-width: 950px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+            color: var(--accent-dark);
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8);
+            position: relative;
+            display: inline-block;
+        }
+
+        /* タイトルの前後に可愛いハートをつけますの */
+        .section-title::before,
+        .section-title::after {
+            content: '♡';
+            color: var(--accent-light);
+            font-size: 1.5rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+        }
+        .section-title::before { left: -40px; }
+        .section-title::after { right: -40px; }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
             max-width: 600px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .text-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        /* ===== ファーストビュー (#hero) ===== */
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
         }
 
-        /* ビーバーちゃんを気だるげに揺らすアニメーション */
-        @keyframes lazy-sway {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-8px) rotate(2deg); }
-        }
-        .lazy-animation {
-            animation: lazy-sway 6s ease-in-out infinite;
+        .beaver-image {
+            width: 320px;
+            height: auto;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 20px 50px rgba(109, 76, 65, 0.25);
+            border: 10px solid var(--white-color);
         }
 
-        /* CTAボタンのスタイル */
-        @keyframes pulse {
+        .hero-text h1 {
+            font-family: var(--font-title);
+            font-size: 3.8rem;
+            font-weight: normal;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+        }
+
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .scroll-down-indicator p {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .heart-icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            animation: bounce-heart 2.5s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes bounce-heart {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        .cta-button {
-            background-color: #FBBF24; /* amber-400 */
-            border: 2px solid #D97706; /* amber-600 */
-            box-shadow: 0 5px 0 #92400E; /* amber-800 */
-            transition: all 0.2s ease;
-            animation: pulse 3s infinite;
-        }
-        .cta-button:hover {
-            animation-play-state: paused;
-            transform: translateY(2px) scale(1.02);
-            box-shadow: 0 3px 0 #92400E;
-        }
-        .cta-button:active {
-            transform: translateY(5px);
-            box-shadow: 0 0px 0 #92400E;
+            50% { transform: scale(1.3); }
         }
 
-        /* スクロールアニメーション */
+        /* ===== メッセージセクション (#message) ===== */
+        .message-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px dashed var(--accent-light);
+        }
+
+        .message-box p {
+            font-size: 1.25rem;
+            margin-bottom: 1.5em;
+        }
+        .message-box p:last-child { margin-bottom: 0; }
+
+
+        /* ===== プレゼントセクション (#presents) ===== */
+        .present-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .present-card {
+            position: relative;
+            height: 300px;
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .present-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .present-box {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
+        }
+
+        .present-box-body, .present-box-lid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-light);
+            border: 2px solid var(--white-color);
+        }
+
+        .present-box-body {
+            bottom: 0;
+            border-radius: 15px;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+        }
+
+        .present-box-lid {
+            top: 0;
+            height: 30%;
+            background-color: var(--accent-color);
+            border-radius: 15px 15px 5px 5px;
+            transform-origin: bottom;
+            transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 2;
+        }
+
+        /* リボンですわ */
+        .ribbon-vertical, .ribbon-horizontal {
+            position: absolute;
+            background-color: var(--accent-dark);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .ribbon-vertical {
+            width: 20px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .ribbon-horizontal {
+            width: 100%;
+            height: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .ribbon-vertical::after, .ribbon-horizontal::after { /* リボン結び目 */
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-dark);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .present-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--white-color);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s 0.5s ease, transform 0.5s 0.5s ease;
+            z-index: 1;
+        }
+
+        .present-content img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .present-content h3 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: var(--accent-dark);
+        }
+        .present-content p {
+            font-size: 1rem;
+        }
+
+        /* プレゼントが開くときの魔法ですわ */
+        .present-card.is-open .present-box-lid {
+            transform: rotateX(-120deg) translateY(-20px) translateZ(10px);
+        }
+        .present-card.is-open .present-box {
+            transform: translateY(70%);
+        }
+        .present-card.is-open .present-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* ===== 思い出アルバム (#memories) ===== */
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .polaroid {
+            background: var(--white-color);
+            padding: 15px 15px 50px 15px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .polaroid:hover {
+            transform: rotate(5deg) scale(1.05);
+            z-index: 10;
+        }
+        .album-grid .polaroid:nth-child(2) {
+            transform: rotate(-3deg);
+        }
+        .album-grid .polaroid:nth-child(2):hover {
+            transform: rotate(-5deg) scale(1.05);
+        }
+        .album-grid .polaroid:nth-child(3) {
+            transform: rotate(2deg);
+        }
+        .album-grid .polaroid:nth-child(3):hover {
+            transform: rotate(3deg) scale(1.05);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            border: 1px solid #eee;
+        }
+
+        .polaroid p {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+
+        /* ===== 最後のメッセージ (#final-message) ===== */
+        .final-text {
+            font-size: 1.6rem;
+            line-height: 2.2;
+            font-weight: bold;
+            margin-bottom: 1.2em;
+        }
+
+        .final-beaver-wrapper {
+            margin-top: 50px;
+        }
+
+        .final-beaver-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--white-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .final-beaver-wrapper p {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            font-weight: normal;
+            color: var(--white-color);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+
+        /* ===== フッター ===== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            background: var(--bg-5);
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /*
+         * =====================================
+         * ここからアニメーションの設定ですわよ
+         * もっと可愛く、もっと弾むように！
+         * =====================================
+        */
+
+        /* --- 汎用アニメーションクラス --- */
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(50px);
+            transition: opacity 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .animate-on-scroll.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* --- ハート演出のためのCSS --- */
-        .beaver-container {
-            position: relative; /* ハートの位置の基準点 */
+
+        /* ディレイ設定 */
+        .animate-on-scroll:nth-child(1) { transition-delay: 0.1s; }
+        .animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
+        .animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+        .animate-on-scroll:nth-child(4) { transition-delay: 0.4s; }
+        .animate-on-scroll:nth-child(5) { transition-delay: 0.5s; }
+
+        .present-grid .animate-on-scroll:nth-child(1) { transition-delay: 0.2s; }
+        .present-grid .animate-on-scroll:nth-child(2) { transition-delay: 0.4s; }
+        .present-grid .animate-on-scroll:nth-child(3) { transition-delay: 0.6s; }
+
+        .album-grid .animate-on-scroll:nth-child(1) { transition-delay: 0.2s; }
+        .album-grid .animate-on-scroll:nth-child(2) { transition-delay: 0.4s; }
+        .album-grid .animate-on-scroll:nth-child(3) { transition-delay: 0.6s; }
+
+
+        /* --- ヒーローセクション専用アニメーション --- */
+        .animate-fade-in-up {
+            animation: fade-in-up 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            opacity: 0;
         }
 
-        .heart {
-            position: absolute;
-            font-size: 24px; /* ハートの基本サイズ */
-            pointer-events: none; /* ハートがクリックの邪魔をしないように */
-            animation: float-up 2s ease-out forwards;
-            color: red; /* デフォルトの色 */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes float-up {
-            from {
-                transform: translateY(0) scale(1);
-                opacity: 1;
+        .animate-float {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-25px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-breath {
+            animation: breath 4s ease-in-out infinite;
+        }
+
+        @keyframes breath {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+
+        /* ===== レスポンシブ対応ですわね ===== */
+        @media (max-width: 960px) {
+            .album-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
             }
-            to {
-                transform: translateY(-200px) scale(0); /* もっと高く飛ぶように */
-                opacity: 0;
+        }
+
+
+        @media (max-width: 768px) {
+            html { cursor: auto; }
+            #custom-cursor { display: none; }
+
+            .section-title { font-size: 2.2rem; }
+            .content-section { padding: 80px 20px; }
+            .section-container { padding: 40px 25px; }
+
+            .hero-content {
+                flex-direction: column;
+                gap: 30px;
             }
+            .hero-text { text-align: center; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-text p { font-size: 1.2rem; }
+            .beaver-image { width: 250px; }
+
+            .present-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .final-text { font-size: 1.3rem; }
+            .final-beaver-wrapper p { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .section-title { font-size: 1.8rem; }
+            .section-title::before, .section-title::after { display: none; }
+            .beaver-image { width: 200px; }
+            .hero-text h1 { font-size: 2rem; }
+            .hero-text p { font-size: 1rem; }
+            .message-box p { font-size: 1rem; }
         }
     </style>
+    <!-- ここまでCSSのお部屋でしたわ -->
+
 </head>
-<body class="text-gray-800">
+<body data-bg-state="1">
 
-    <section class="storybook-page">
-        <div class="text-center">
-            <h1 class="text-4xl md:text-6xl text-gray-800 mb-8 animate-on-scroll">ビーバーちゃんは<br>あまり動きたくないのですわ</h1>
-            <img 
-                src="beaver_chan.png" 
-                alt="主役のビーバーちゃん" 
-                class="w-64 md:w-80 mx-auto lazy-animation animate-on-scroll"
-                style="transition-delay: 200ms;"
-                onerror="this.onerror=null;this.src='https://placehold.co/400x400/FDF6E8/333?text=Beaver-chan'"
-            >
-            <p class="mt-8 text-lg animate-on-scroll" style="transition-delay: 400ms;">（はぁ…またお仕事の時間かしら…）</p>
-        </div>
-    </section>
+    <!-- マウスを追いかける、ふわふわカーソルですわ -->
+    <div id="custom-cursor"></div>
 
-    <section class="storybook-page">
-        <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
-            <div class="text-box text-lg leading-relaxed order-2 md:order-1 animate-on-scroll" style="transition-delay: 400ms;">
-                <p>そもそも、かわいくしているのだって<br>なかなかの重労働ですのよ。<br>お分かりになって？</p>
-                <br>
-                <p class="font-bold">「ニンゲンは勝手に癒やされていれば<br>よろしいんじゃなくて？」</p>
-            </div>
-            <div class="order-1 md:order-2 animate-on-scroll">
-                <img 
-                    src="beaver_chan.png" 
-                    alt="気だるげなビーバーちゃん" 
-                    class="w-64 mx-auto transform -rotate-6"
-                    onerror="this.onerror=null;this.src='https://placehold.co/400x400/FDF6E8/333?text=Beaver-chan'"
-                >
-            </div>
-        </div>
-    </section>
+    <!-- キラキラ背景用のコンテナですわ -->
+    <div class="sparkle-container"></div>
 
-    <section class="storybook-page" style="background-color: rgba(186, 230, 253, 0.2);">
-        <div class="text-center max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl text-gray-800 mb-8 animate-on-scroll">ビーバーちゃんの生態ですわ</h2>
-            <div class="grid md:grid-cols-3 gap-8 text-left">
-                <div class="text-box animate-on-scroll" style="transition-delay: 200ms;">
-                    <h3 class="text-xl font-bold mb-2 text-yellow-500">① 勝手に癒やされるがよい</h3>
-                    <p>「別にわたしは何もしていませんわ。人間が勝手にこのわがままボディに抱きついて、癒やされているだけですのよ。」</p>
+    <main>
+        <!-- ===== ファーストビュー ===== -->
+        <section id="hero" class="content-section" data-bg="1">
+            <div class="hero-content">
+                <div class="hero-image-wrapper animate-float">
+                    <!-- ここを修正しましたわ！ -->
+                    <img src="beaver_chan.png" alt="ビーバーちゃん" class="beaver-image animate-breath">
                 </div>
-                <div class="text-box animate-on-scroll" style="transition-delay: 400ms;">
-                    <h3 class="text-xl font-bold mb-2 text-blue-500">② 聞いているフリは得意</h3>
-                    <p>「お悩み相談？…はぁ。聞いているフリは得意ですわよ。だいたい右から左に流れていきますけれど、何か問題でも？」</p>
-                </div>
-                <div class="text-box animate-on-scroll" style="transition-delay: 600ms;">
-                    <h3 class="text-xl font-bold mb-2 text-red-500">③ おでかけは…別ですの</h3>
-                    <p>「おでかけですって！？…べ、別にテンションが上がっているわけではございませんわ。でも、外の景色は…その…悪くないですわね！」</p>
+                <div class="hero-text">
+                    <h1 class="animate-fade-in-up" style="animation-delay: 0.5s;">大切なおともだちへ</h1>
+                    <p class="animate-fade-in-up" style="animation-delay: 0.8s;">特別な日、心からおめでとうございますの！</p>
+                    <p class="animate-fade-in-up" style="animation-delay: 1.1s;">わたくしの気持ち、受け取ってくださるかしら？</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="storybook-page" style="background-color: rgba(254, 243, 199, 0.2);">
-        <div class="text-center max-w-2xl mx-auto">
-            <h2 class="text-3xl md:text-4xl text-gray-800 mb-6 animate-on-scroll">あら、あなた。<br>わたしと、おともだちになってくださる？</h2>
-            <p class="text-lg mb-8 animate-on-scroll" style="transition-delay: 200ms;">…まぁ、なってあげてもよろしくてよ。退屈しのぎくらいにはなるのかしら。</p>
-            
-            <div class="beaver-container animate-on-scroll" style="transition-delay: 400ms;">
-                <img 
-                    src="beaver_chan.png" 
-                    alt="おともだちを待つビーバーちゃん" 
-                    class="w-64 mx-auto mb-8 lazy-animation"
-                    onerror="this.onerror=null;this.src='https://placehold.co/400x400/FDF6E8/333?text=Beaver-chan'"
-                >
+            <div class="scroll-down-indicator">
+                <p>物語の始まりですわ</p>
+                <span class="heart-icon">♡</span>
             </div>
+        </section>
 
-            <a href="#" id="friend-button" class="cta-button inline-block text-white text-2xl font-bold py-4 px-12 rounded-full shadow-lg animate-on-scroll" style="transition-delay: 600ms;">
-                おともだちになる！
-            </a>
-            <p class="mt-8 text-sm text-gray-500 animate-on-scroll" style="transition-delay: 800ms;">…よろしくてよ。</p>
-        </div>
-    </section>
+        <!-- ===== メッセージセクション ===== -->
+        <section id="message" class="content-section" data-bg="2">
+            <div class="section-container">
+                <h2 class="section-title animate-on-scroll">Message for you</h2>
+                <div class="message-box">
+                    <p class="animate-on-scroll">あら、おともだち。お誕生日なんですってねえ。</p>
+                    <p class="animate-on-scroll">あなたと過ごす毎日は、キラキラしていて、まるでお菓子箱のようですの。</p>
+                    <p class="animate-on-scroll">いつもたくさんの笑顔をありがとう、なのねえ。</p>
+                    <p class="animate-on-scroll">今日という日が、あなたにとって世界で一番、素敵な一日になりますように。</p>
+                    <p class="animate-on-scroll">心から願っておりますわ。</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- ===== プレゼントセクション ===== -->
+        <section id="presents" class="content-section" data-bg="3">
+            <div class="section-container">
+                <h2 class="section-title animate-on-scroll">A Gift for you</h2>
+                <p class="section-subtitle animate-on-scroll">心を込めて選びましたの。箱をタップして開けてみてちょうだい！</p>
+                <div class="present-grid">
+                    <!-- プレゼント 1 -->
+                    <div class="present-card animate-on-scroll">
+                        <div class="present-box">
+                            <div class="present-box-lid">
+                                <div class="ribbon-vertical"></div>
+                                <div class="ribbon-horizontal"></div>
+                            </div>
+                            <div class="present-box-body"></div>
+                        </div>
+                        <div class="present-content">
+                            <img src="beaver_chan_muffler.png" alt="ふわふわマフラー">
+                            <h3>ふわふわのマフラー</h3>
+                            <p>寒い日でも、心まで温かくなるようなマフラーですわ。</p>
+                        </div>
+                    </div>
+                    <!-- プレゼント 2 -->
+                    <div class="present-card animate-on-scroll">
+                         <div class="present-box">
+                            <div class="present-box-lid">
+                                <div class="ribbon-vertical"></div>
+                                <div class="ribbon-horizontal"></div>
+                            </div>
+                            <div class="present-box-body"></div>
+                        </div>
+                        <div class="present-content">
+                            <img src="beaver_chan_tiara.png" alt="きらめく宝石箱">
+                            <h3>きらめく宝石箱</h3>
+                            <p>おともだちの宝物をしまうのに、ぴったりじゃないかしら？</p>
+                        </div>
+                    </div>
+                    <!-- プレゼント 3 -->
+                    <div class="present-card animate-on-scroll">
+                         <div class="present-box">
+                            <div class="present-box-lid">
+                                <div class="ribbon-vertical"></div>
+                                <div class="ribbon-horizontal"></div>
+                            </div>
+                            <div class="present-box-body"></div>
+                        </div>
+                        <div class="present-content">
+                            <img src="beaver_chan_switch3.png" alt="Switch3">
+                            <h3>Switch3</h3>
+                            <p>今度、わたくしと一緒に最新のゲーム機で遊びませんこと？</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== 思い出アルバムセクション ===== -->
+        <section id="memories" class="content-section" data-bg="4">
+            <div class="section-container">
+                <h2 class="section-title animate-on-scroll">Our Memories</h2>
+                <p class="section-subtitle animate-on-scroll">これからも、たくさんの思い出を作っていきたいですわねえ。</p>
+                <div class="album-grid">
+                    <div class="polaroid animate-on-scroll">
+                        <img src="beaver_chan_picnic.png" alt="ピクニックの思い出">
+                        <p>ぽかぽか陽気のピクニック</p>
+                    </div>
+                     <div class="polaroid animate-on-scroll">
+                        <img src="beaver_chan_beach.png" alt="海の思い出">
+                        <p>初めて見た海の色</p>
+                    </div>
+                     <div class="polaroid animate-on-scroll">
+                        <img src="beaver_chan_hanabi.png" alt="お祭りの思い出">
+                        <p>夜空を彩る花火</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 最後のメッセージ ===== -->
+        <section id="final-message" class="content-section" data-bg="5">
+            <div class="section-container final-message-content">
+                <h2 class="section-title animate-on-scroll">And finally...</h2>
+                <p class="final-text animate-on-scroll">おともだちが生まれてきてくれたこと、</p>
+                <p class="final-text animate-on-scroll">わたくしに出会ってくれたこと、</p>
+                <p class="final-text animate-on-scroll">ぜんぶが、わたくしの宝物なのねえ。</p>
+                <p class="final-text animate-on-scroll">これからも、ずっとずっと、仲良しでいてほしいのかしら。</p>
+                <div class="final-beaver-wrapper animate-on-scroll">
+                    <!-- ここも修正しましたわ！ -->
+                    <img src="beaver_chan.png" alt="ビーバーちゃん" class="final-beaver-image">
+                    <p>With Love, Happy Birthday!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; おうちにかえりましょ</p>
+    </footer>
+
+    <!-- ここからJavaScriptのお部屋ですわ -->
     <script>
-        // --- スクロールアニメーションのためのJavaScript ---
+        /*
+         * JavaScriptですわね。ページに命を吹き込みますの。
+         * 今回は「とびっきり可愛く」というご注文に合わせて、
+         * マウスを追いかける魔法のカーソルや、プレゼントが開く仕掛けなど、
+         * 新しい魔法をたくさん追加いたしましたわ。
+        */
+
         document.addEventListener('DOMContentLoaded', () => {
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
+
+            // わたくし、ビーバーちゃんからのご挨拶ですわ
+            console.log("あら、ソースコードまで見てくださるの？うれしいですわねえ。可愛いの魔法、かかっているかしら？");
+
+            /**
+             * マウスを追いかけるカスタムカーソルの魔法ですの
+             */
+            const setupCustomCursor = () => {
+                const cursor = document.getElementById('custom-cursor');
+                if (!cursor) return;
+
+                window.addEventListener('mousemove', e => {
+                    // スムーズに動くように、CSSではなくJSで位置を更新しますわ
+                    cursor.style.left = `${e.clientX}px`;
+                    cursor.style.top = `${e.clientY}px`;
                 });
-            }, observerOptions);
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
-
-            // --- ここからハート演出のためのJavaScript ---
-            const friendButton = document.getElementById('friend-button');
-            const beaverContainer = document.querySelector('.beaver-container');
-
-            friendButton.addEventListener('click', (event) => {
-                event.preventDefault(); // リンクでページ上部に飛ぶのを防ぐ
-
-                // ハートをたくさん生成する
-                for (let i = 0; i < 30; i++) {
-                    // 少し時間差をつけてハートを生成
-                    setTimeout(() => {
-                        createHeart(beaverContainer);
-                    }, i * 50);
-                }
-            });
-
-            function createHeart(container) {
-                const heart = document.createElement('span');
-                heart.className = 'heart';
-                
-                // いろいろなハートや色を用意
-                const heartIcons = ['❤️', '💖', '💗', '💕', '💓'];
-                const heartColors = ['#ff69b4', '#ff1493', '#ffc0cb', '#db7093', '#f08080'];
-
-                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
-                heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
-
-                // ハートの出現位置を画像周辺にランダムに設定
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.top = Math.random() * 100 + '%';
-
-                // ハートの大きさとアニメーション時間をランダムに
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                const animationDuration = Math.random() * 1.5 + 1; // 1秒から2.5秒
-                heart.style.animationDuration = animationDuration + 's';
-
-                container.appendChild(heart);
-
-                // アニメーションが終わったらハートを消す
-                setTimeout(() => {
-                    heart.remove();
-                }, animationDuration * 1000);
+            };
+            // スマートフォンではカーソルは不要ですわね
+            if (window.matchMedia("(min-width: 769px)").matches) {
+                setupCustomCursor();
             }
+
+
+            /**
+             * キラキラを降らせる魔法ですの
+             * @param {number} count - 降らせるキラキラの数ですわ
+             */
+            const createSparkles = (count) => {
+                const container = document.querySelector('.sparkle-container');
+                if (!container) return;
+
+                for (let i = 0; i < count; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+
+                    const size = Math.random() * 4 + 2; // 2pxから6pxの大きさ
+                    sparkle.style.width = `${size}px`;
+                    sparkle.style.height = `${size}px`;
+                    sparkle.style.top = `${Math.random() * -10}vh`; // 上からスタート
+                    sparkle.style.left = `${Math.random() * 100}vw`;
+
+                    const duration = Math.random() * 8 + 7; // 7秒から15秒
+                    const delay = Math.random() * 10; // 0秒から10秒の遅延
+                    sparkle.style.animationDuration = `${duration}s`;
+                    sparkle.style.animationDelay = `${delay}s`;
+
+                    container.appendChild(sparkle);
+                }
+            };
+
+            // キラキラを60個に増やしてみましたの！
+            createSparkles(60);
+
+
+            /**
+             * スクロールで要素をアニメーションさせるための設定ですわ
+             * Intersection Observer という便利なものを使いますのよ
+             */
+            const setupScrollAnimations = () => {
+                const animatedElements = document.querySelectorAll('.animate-on-scroll');
+                if (!animatedElements.length) return;
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.15 // 要素が15%見えたら発動ですの
+                });
+
+                animatedElements.forEach(el => observer.observe(el));
+            };
+
+            setupScrollAnimations();
+
+
+            /**
+             * スクロールで背景色を変える魔法ですわ
+             */
+            const setupBackgroundSwitcher = () => {
+                const sections = document.querySelectorAll('.content-section[data-bg]');
+                const body = document.body;
+                if (!sections.length) return;
+                
+                const sectionPositions = Array.from(sections).map(section => ({
+                    id: section.id,
+                    top: section.offsetTop,
+                    bottom: section.offsetTop + section.offsetHeight,
+                    bgState: section.getAttribute('data-bg')
+                }));
+                
+                let currentSectionId = '';
+                let ticking = false;
+
+                const handleScroll = () => {
+                    const scrollY = window.scrollY;
+                    const windowHeight = window.innerHeight;
+                    // 画面の中央より少し上を基準点にしますわ
+                    const triggerPoint = scrollY + windowHeight * 0.6;
+
+                    let activeSection = null;
+
+                    for (const section of sectionPositions) {
+                        if (triggerPoint >= section.top && triggerPoint < section.bottom) {
+                            activeSection = section;
+                            break;
+                        }
+                    }
+                    
+                    // もしどのセクションにもいなければ、一番近いものを選びますの
+                    if (!activeSection) {
+                        if (scrollY < sectionPositions[0].top) {
+                            activeSection = sectionPositions[0];
+                        } else {
+                            activeSection = sectionPositions[sectionPositions.length - 1];
+                        }
+                    }
+
+                    if (activeSection && activeSection.id !== currentSectionId) {
+                        currentSectionId = activeSection.id;
+                        body.setAttribute('data-bg-state', activeSection.bgState);
+                    }
+                    
+                    ticking = false;
+                };
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            handleScroll();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }, { passive: true });
+                
+                handleScroll(); // 初期読み込み
+            };
+
+            setupBackgroundSwitcher();
+
+            /**
+             * プレゼントの箱を開ける魔法ですわ！
+             */
+            const setupPresentOpening = () => {
+                const presentCards = document.querySelectorAll('.present-card');
+                presentCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        // すでに開いていたら何もしませんの
+                        if (card.classList.contains('is-open')) return;
+
+                        card.classList.add('is-open');
+
+                        // 箱が開いたときにキラキラが飛び散る演出ですわ
+                        createClickSparkles(card);
+                    });
+                });
+            };
+
+            const createClickSparkles = (targetElement) => {
+                const rect = targetElement.getBoundingClientRect();
+                const container = document.querySelector('.sparkle-container');
+                if (!container) return;
+
+                for (let i = 0; i < 20; i++) { // 20個のキラキラを放出！
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle'; // fallアニメーションを使いまわしますわ
+                    
+                    const size = Math.random() * 5 + 3;
+                    sparkle.style.width = `${size}px`;
+                    sparkle.style.height = `${size}px`;
+                    sparkle.style.backgroundColor = `hsl(${Math.random() * 60 + 320}, 100%, 80%)`; // ピンク系の色
+                    
+                    // クリック位置から飛び散るように見せますの
+                    const startX = rect.left + rect.width / 2;
+                    const startY = rect.top + rect.height / 2;
+                    sparkle.style.left = `${startX}px`;
+                    sparkle.style.top = `${startY}px`;
+
+                    // アニメーションはJSで制御しますわ
+                    sparkle.style.position = 'fixed'; // fixedにしないとずれますの
+                    container.appendChild(sparkle);
+
+                    const angle = Math.random() * 360;
+                    const radius = Math.random() * 150 + 50;
+                    const endX = Math.cos(angle * Math.PI / 180) * radius;
+                    const endY = Math.sin(angle * Math.PI / 180) * radius;
+                    const duration = Math.random() * 800 + 500;
+
+                    sparkle.animate([
+                        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                        { transform: `translate(-50%, -50%) translate(${endX}px, ${endY}px) scale(0)`, opacity: 0 }
+                    ], {
+                        duration: duration,
+                        easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                        fill: 'forwards'
+                    });
+
+                    // アニメーションが終わったら要素を消しますの。エコですわね。
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, duration);
+                }
+            };
+
+            setupPresentOpening();
+// beaver-2.html に追加するコード
+
+// --- ここからが追加した魔法ですわ ---
+const setupReturnMagic = () => {
+    const footerElement = document.querySelector('footer');
+    if (!footerElement) return;
+
+    // フッターにカーソルを合わせると、ヒントが出るようにしますの
+    footerElement.style.cursor = 'pointer';
+    footerElement.title = 'いつものわたくしに戻りますわ…';
+
+    footerElement.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log("あら、もうお帰りの時間かしら？");
+
+        // ページが静かにおやすみする準備をしますの
+        document.body.style.transition = 'background-color 2s ease, opacity 2s ease';
+        document.body.style.backgroundColor = '#FDF6E8'; // 元のページの色に戻っていきますわ
+        document.body.style.opacity = 0;
+
+        // キラキラもだんだんとおとなしくなりますの
+        const sparkles = document.querySelector('.sparkle-container');
+        if (sparkles) {
+            sparkles.style.transition = 'opacity 2s ease';
+            sparkles.style.opacity = 0;
+        }
+
+        // 完全に元のページに戻る前に、少しだけ時間をくださいまし
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 2000); // 2秒かけて、元の世界へ…
+    });
+};
+
+setupReturnMagic();
+// --- 追加した魔法はここまでですわ ---
         });
     </script>
+    <!-- ここまでJavaScriptのお部屋でしたわ -->
+
 </body>
 </html>
